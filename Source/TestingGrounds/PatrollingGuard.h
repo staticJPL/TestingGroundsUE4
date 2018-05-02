@@ -16,8 +16,8 @@ class TESTINGGROUNDS_API APatrollingGuard : public ATP_ThirdPersonCharacter
 	
 
 public:
-	TArray <AActor*> GetPatrolPoints();
 
+	TArray <AActor*> GetPatrolPoints();
 	UPROPERTY(EditAnywhere, Category = "Way Points")
 	TArray <AActor*> PatrolPointsCPP;
 };
