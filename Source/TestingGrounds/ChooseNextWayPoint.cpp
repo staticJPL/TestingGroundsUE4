@@ -1,33 +1,33 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ChooseNextWayPoint.h"
-#include "PatrollingGuard.h"
 #include "AIController.h"
+#include "PatrolRoute.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 
 EBTNodeResult::Type UChooseNextWayPoint::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) {
+	// Index Key is a struct, the get value returns the index number of the data stored in the blackboard, Takes an FName String that is taken from
+	// The drop down.
 	auto BlackBoardComp = OwnerComp.GetBlackboardComponent();
-	auto PatrolPoints = GetControlPoints(OwnerComp);
+	auto PatrolRouteComp = OwnerComp.GetAIOwner()->GetPawn()->FindComponentByClass<UPatrolRoute>();
+	auto PatrolPoints = GetControlPoints(PatrolRouteComp);
 	auto Index = BlackBoardComp->GetValueAsInt(IndexKey.SelectedKeyName);
+	if (!ensure(PatrolRouteComp)) { return EBTNodeResult::Failed; }
 	if (PatrolPoints.Num() == 0) {
+		UE_LOG(LogTemp, Warning, TEXT("A Guard is missing patrol points"));
 		return EBTNodeResult::Failed;
 	}
 	SetNextWayPoint(PatrolPoints, Index, BlackBoardComp);
 	CycleIndex(Index, PatrolPoints, BlackBoardComp);
-	//Index Key is a struct, the get value returns the index number of the data stored in the blackboard, Takes an FName String that is taken from
-	// The drop down.
+
 	return EBTNodeResult::Succeeded;
 }
 
 
-
-TArray<AActor*> UChooseNextWayPoint::GetControlPoints(UBehaviorTreeComponent& OwnerComp) {
-	// Need AI controller Include To GetPawn
-	auto Guard = Cast<APatrollingGuard>(OwnerComp.GetAIOwner()->GetPawn());
-	return Guard->GetPatrolPoints();
-	
+TArray<AActor*> UChooseNextWayPoint::GetControlPoints(UPatrolRoute *PatrolRouteComp) {
+	return PatrolRouteComp->GetPatrolPoints();
 }
 
 void UChooseNextWayPoint::SetNextWayPoint(TArray<AActor*> &PatrolPoints,int32& Index, UBlackboardComponent* BlackBoardComp) {

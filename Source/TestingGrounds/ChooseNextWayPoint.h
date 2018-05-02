@@ -6,7 +6,7 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "ChooseNextWayPoint.generated.h"
 
-class APatrollingGuard;
+class UPatrolRoute;
 
 /**
  * 
@@ -27,8 +27,7 @@ protected:
 	struct FBlackboardKeySelector WayPoint;
 
 private:
-	APatrollingGuard* PatrollingGuard = nullptr;
-	TArray<AActor*> GetControlPoints(UBehaviorTreeComponent& OwnerComp);
+	TArray<AActor*> GetControlPoints(UPatrolRoute* PatrolRouteComp);
 	void SetNextWayPoint(TArray<AActor*> &PatrolPoints,int32 &Index, UBlackboardComponent* BlackBoardComp);
 	void CycleIndex(int32& Index, TArray<AActor*> &PatrolPoints, UBlackboardComponent* BlackBoardComp);
 };
