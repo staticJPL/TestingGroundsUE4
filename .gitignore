@@ -62,3 +62,18 @@ DerivedDataCache/*
 # Starter Content
 Content/StarterContent
 .vs/
+
+# Ignore Profiles
+*.pri
+*.workspace
+*.pro.*
+*.kdev4
+*.pro
+*.code-workspace
+*.idea/
+*.vscode/
+Makefile
+TestingGroundsCodeCompletionFolders.txt
+TestingGroundsCodeLitePreProcessor.txt
+CMakeLists.txt
+
