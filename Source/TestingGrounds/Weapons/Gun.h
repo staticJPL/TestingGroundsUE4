@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
@@ -52,3 +53,33 @@ public:
 	
 	
 };
+=======
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "Gun.generated.h"
+
+UCLASS()
+class TESTINGGROUNDS_API AGun : public AActor
+{
+	GENERATED_BODY()
+	
+public:	
+	// Sets default values for this actor's properties
+	AGun();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	
+	
+};
+>>>>>>> 97ed80e5526c31d2e3623c2c64cdc42f0e5afc4e
