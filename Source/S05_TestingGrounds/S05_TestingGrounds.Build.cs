@@ -4,8 +4,11 @@ using UnrealBuildTool;
 
 public class S05_TestingGrounds : ModuleRules
 {
-	public S05_TestingGrounds(TargetInfo Target)
-	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AIModule", "GameplayTasks" });
-	}
+    public S05_TestingGrounds(ReadOnlyTargetRules Target) : base(Target)
+    {
+        MinFilesUsingPrecompiledHeaderOverride = 1;
+        bFasterWithoutUnity = true;
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AIModule", "GameplayTasks" });
+        PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+    }
 }
