@@ -76,4 +76,5 @@ Makefile
 TestingGroundsCodeCompletionFolders.txt
 TestingGroundsCodeLitePreProcessor.txt
 CMakeLists.txt
+FirstPersonExampleMap_BuildData.uasset
 
